@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Paradiso - Bienvenido</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+    <main class="login-container">
+        <div class="login-card">
+            <!-- Logo y Título -->
+            <div class="logo-icon">🌿</div>
+            <h1>Hotel Paradiso</h1>
+            <p>Selecciona tu portal de acceso</p>
+
+            <div class="login-options">
+                
+                <!-- PORTAL CLIENTE -->
+                <div class="login-box">
+                    <h2>Área de Clientes</h2>
+                    <p>Reserva tu estancia o gestiona tus reservas actuales.</p>
+                    
+                    <form onsubmit="event.preventDefault(); window.location.href='cliente-reservar.html';">
+                        <input type="email" class="form-input" placeholder="Tu correo electrónico (opcional)">
+                        <button type="submit" class="btn">Entrar / Reservar</button>
+                    </form>
+                </div>
+
+                <!-- PORTAL EMPLEADO -->
+                <div class="login-box">
+                    <h2>Portal Empleado</h2>
+                    <p>Acceso exclusivo para gestión interna del hotel.</p>
+                    
+                    <form onsubmit="event.preventDefault(); window.location.href='admin-habitaciones.html';">
+                        <input type="text" class="form-input" placeholder="ID Empleado (Ej: admin)" required>
+                        <input type="password" class="form-input" placeholder="Contraseña" required>
+                        <button type="submit" class="btn btn-outline">Acceder al Panel</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,158 @@
+/* Paleta de colores: Tonos tierra, blancos y beiges */
+:root {
+    --bg-main: #FAFAF7; /* Blanco crema muy suave */
+    --bg-card: #FFFFFF;
+    --primary: #8D6E63; /* Marrón suave / Tierra */
+    --primary-dark: #5D4037; /* Marrón oscuro */
+    --accent: #D7CCC8; /* Beige claro */
+    --text-main: #3E2723; /* Marrón casi negro para texto */
+    --text-light: #795548;
+    --border: #EFEBE9;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Pantalla de Login / Bienvenida */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    padding: 2rem;
+    background-image: url('https://images.unsplash.com/photo-1542314831-c6a4d14d8373?q=80&w=2000&auto=format&fit=crop'); /* Imagen decorativa de hotel de fondo */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+/* Filtro sobre la imagen de fondo para que se lea bien */
+.login-container::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(250, 250, 247, 0.85); /* Crema semitransparente */
+}
+
+.login-card {
+    background-color: var(--bg-card);
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(93, 64, 55, 0.1);
+    width: 100%;
+    max-width: 800px;
+    position: relative;
+    z-index: 1; /* Para que quede por encima del filtro */
+    text-align: center;
+    border-top: 5px solid var(--primary);
+}
+
+.logo-icon {
+    font-size: 3rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+.login-card h1 {
+    color: var(--primary-dark);
+    margin-bottom: 0.5rem;
+    font-size: 2.2rem;
+}
+
+.login-card p {
+    color: var(--text-light);
+    margin-bottom: 2.5rem;
+}
+
+/* Las dos opciones: Cliente y Empleado */
+.login-options {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .login-options {
+        flex-direction: column;
+    }
+}
+
+.login-box {
+    flex: 1;
+    padding: 2rem;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.login-box:hover {
+    border-color: var(--primary);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.login-box h2 {
+    color: var(--primary-dark);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+/* Botones */
+.btn {
+    display: inline-block;
+    width: 100%;
+    padding: 0.8rem 1.5rem;
+    background-color: var(--primary);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 1rem;
+}
+
+.btn:hover {
+    background-color: var(--primary-dark);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+}
+
+.btn-outline:hover {
+    background-color: var(--primary);
+    color: white;
+}
+
+/* Inputs */
+.form-input {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text-main);
+    font-size: 1rem;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px var(--accent);
+}
