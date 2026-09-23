@@ -5,7 +5,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.ManyToMany;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.ArrayList;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -29,8 +32,8 @@ public class Reserva {
     @ManyToOne
     private Huesped huesped;
 
-    @ManyToOne
-    private Habitacion habitacion;
+    @ManyToMany
+    private List<Habitacion> habitaciones = new ArrayList<>();
 
     public Reserva() {
     }
@@ -48,6 +51,6 @@ public class Reserva {
     public void setEstado(String estado) { this.estado = estado; }
     public Huesped getHuesped() { return huesped; }
     public void setHuesped(Huesped huesped) { this.huesped = huesped; }
-    public Habitacion getHabitacion() { return habitacion; }
-    public void setHabitacion(Habitacion habitacion) { this.habitacion = habitacion; }
+    public List<Habitacion> getHabitaciones() { return habitaciones; }
+    public void setHabitaciones(List<Habitacion> habitaciones) { this.habitaciones = habitaciones; }
 }

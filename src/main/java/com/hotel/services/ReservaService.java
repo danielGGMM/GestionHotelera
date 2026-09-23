@@ -26,26 +26,42 @@ public class ReservaService {
     }
 
     public Reserva crear(Reserva r) {
-        // Validar que el huésped y la habitación existen si se pasan referencias
+        // Validar que el huésped existe si se pasa referencia
         if (r.getHuesped() != null && r.getHuesped().getId() != null) {
             Huesped h = huespedRepo.findById(r.getHuesped().getId())
                     .orElseThrow(() -> new IllegalArgumentException("Huésped no encontrado"));
             r.setHuesped(h);
         }
 
-        if (r.getHabitacion() != null && r.getHabitacion().getId() != null) {
-            Habitacion hab = habitacionRepo.findById(r.getHabitacion().getId())
-                    .orElseThrow(() -> new IllegalArgumentException("Habitación no encontrada"));
-            r.setHabitacion(hab);
+        // Validar que todas las habitaciones existen
+        if (r.getHabitaciones() != null && !r.getHabitaciones().isEmpty()) {
+            List<Habitacion> habitacionesValidadas = new java.util.ArrayList<>();
+            for (Habitacion habReq : r.getHabitaciones()) {
+                if (habReq.getId() != null) {
+                    Habitacion habBd = habitacionRepo.findById(habReq.getId())
+                            .orElseThrow(() -> new IllegalArgumentException("Habitación con ID " + habReq.getId() + " no encontrada"));
+                    habitacionesValidadas.add(habBd);
+                }
+            }
+            r.setHabitaciones(habitacionesValidadas);
+        } else {
+             throw new IllegalArgumentException("La reserva debe tener al menos una habitación");
         }
 
-        // Calcular precio total si hay fechas y habitación
-        if (r.getFechaEntrada() != null && r.getFechaSalida() != null && r.getHabitacion() != null && r.getHabitacion().getPrecioPorNoche() != null) {
+        // Calcular precio total sumando los precios de todas las habitaciones
+        if (r.getFechaEntrada() != null && r.getFechaSalida() != null) {
             long noches = ChronoUnit.DAYS.between(r.getFechaEntrada(), r.getFechaSalida());
             if (noches <= 0) {
                 throw new IllegalArgumentException("La fecha de salida debe ser posterior a la fecha de entrada");
             }
-            r.setPrecioTotal(noches * r.getHabitacion().getPrecioPorNoche());
+            
+            double precioTotalPorNoche = 0.0;
+            for (Habitacion hab : r.getHabitaciones()) {
+                if (hab.getPrecioPorNoche() != null) {
+                    precioTotalPorNoche += hab.getPrecioPorNoche();
+                }
+            }
+            r.setPrecioTotal(noches * precioTotalPorNoche);
         }
 
         if (r.getEstado() == null) {

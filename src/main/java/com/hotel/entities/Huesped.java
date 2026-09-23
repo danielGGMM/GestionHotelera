@@ -4,12 +4,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 @Entity
 public class Huesped {
-
+@OneToOne
+@JoinColumn(name = "usuario_id", unique = true)
+private Usuario usuario;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,9 +25,12 @@ public class Huesped {
     private String email;
        @Pattern(regexp = "^[0-9]{9}$", message = "El teléfono debe tener 9 números")
     private String telefono;
+       
 
     public Huesped() {
     }
+      
+
 
     public Long getId() {
         return id;
@@ -64,4 +71,11 @@ public class Huesped {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
+   public Usuario getUsuario() {
+    return usuario;
+}
+
+public void setUsuario(Usuario usuario) {
+    this.usuario = usuario;
+}
 }
